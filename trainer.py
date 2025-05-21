@@ -20,7 +20,6 @@ class neural_network():
 
         self.train_loss = []
         self.validation_loss = []
-        self.test_loss = []
 
     def forwardProp(self,inputs):
         
@@ -107,9 +106,19 @@ class neural_network():
                 self.validation_loss.append(self.calculate_error(self.a2,yval))
             
             print('Epoch for %d/%d : Train data loss = %f - Validation data loss = %f' % (i, epoch, self.train_loss[i], self.validation_loss[i]))
+        
+        x = np.linspace(0,epoch+1,1)
 
         if(xtest != None and ytest != None):
-            print()
+            self.forwardProp(xtest)
+            print("Test accuracy = %f" % (1 - self.calculate_error(self.a2,ytest)))
+        if(xval != None and yval != None):
+            plt.scatter(x,self.validation_loss,color='red')
+        
+        plt.scatter(x,self.train_loss,color='blue')
+        plt.legend()
+        plt.title("Training Error vs Epoches")
+        plt.show()
 
 
         return self.weights1, self.bias1, self.weights2, self.bias2
