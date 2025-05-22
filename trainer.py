@@ -26,7 +26,7 @@ class neural_network():
         self.r1 = np.dot(inputs, self.weights1) + self.bias1
         self.a1 = self.activation(self.r1)
         r2 = np.dot(self.a1, self.weights2) + self.bias2
-        if self.loss_func == 'categorical_crossentropy':
+        if self.loss_function == 'categorical_crossentropy':
 
             if(self.act_function != "soft_max"):
                 raise ValueError("Invalid combination of activation and loss functions")
@@ -35,37 +35,38 @@ class neural_network():
             self.a2 = tmp / np.sum(tmp, axis=1, keepdims=True)
         else:
             self.a2 = self.activation(r2)
+        return self.a2
 
     def backwardProp(self,input,label):
         
         m,_ = input.shape
         tmp = self.calculate_gradient(label)
         old_weights = self.weights2
-        self.weights2 -= self.learning_rate * ((1 / m) * np.dot(self.a1.T, tmp))
-        self.bias2 -= self.learning_rate * ((1 / m) * np.sum(tmp, axis=0, keepdims=True))
+        self.weights2 -= self.lr * ((1 / m) * np.dot(self.a1.T, tmp))
+        self.bias2 -= self.lr * ((1 / m) * np.sum(tmp, axis=0, keepdims=True))
         temp = np.dot(tmp, old_weights.T) * self.activation_derivative(self.a1)
-        self.weights1 -= self.learning_rate * ((1 / m) * np.dot(input.T, temp))
-        self.bias1 -= self.learning_rate * ((1 / m) * np.sum(temp, axis=0, keepdims=True))
+        self.weights1 -= self.lr * ((1 / m) * np.dot(input.T, temp))
+        self.bias1 -= self.lr * ((1 / m) * np.sum(temp, axis=0, keepdims=True))
 
     def calculate_error(self,predicted,measured):
 
-        if self.loss_func == 'mse':
+        if self.loss_function == 'mse':
             return np.mean((predicted - measured)**2)
-        elif self.loss_func == 'log_loss':
+        elif self.loss_function == 'log_loss':
             return -np.mean(predicted*np.log(predicted) + (1-measured)*np.log(1-predicted))
-        elif self.loss_func == 'categorical_crossentropy':
+        elif self.loss_function == 'categorical_crossentropy':
             return -np.mean(measured*np.log(predicted))
         else:
             raise ValueError('Invalid loss function')
         
     def calculate_gradient(self, label):
 
-        if self.loss_func == 'mse':
-            self.dz2 = self.a2 - label
-        elif self.loss_func == 'log_loss':
-            self.dz2 = -(label/self.a2 - (1-label)/(1-self.a2))
-        elif self.loss_func == 'categorical_crossentropy':
-            self.dz2 = self.a2 - label
+        if self.loss_function == 'mse':
+            return self.a2 - label
+        elif self.loss_function == 'log_loss':
+            return -(label/self.a2 - (1-label)/(1-self.a2))
+        elif self.loss_function == 'categorical_crossentropy':
+            return self.a2 - label
         else:
             raise ValueError('Invalid loss function')
         
@@ -94,31 +95,36 @@ class neural_network():
         else:
             return ValueError("Invalid activation function")
         
-    def Trainer(self, epoch, xtrain, ytrain, xval=None, yval=None, xtest=None, ytest=None):
+    def train(self, epoch, xtrain, ytrain, xval=None, yval=None, xtest=None, ytest=None):
 
         for i in range(epoch):
             self.forwardProp(xtrain)
             self.backwardProp(xtrain,ytrain)
             self.train_loss.append(self.calculate_error(self.a2, ytrain))
 
-            if(xval != None and yval != None):
+            if(np.any(xval) != None and np.any(yval) != None):
                 self.forwardProp(xval)
                 self.validation_loss.append(self.calculate_error(self.a2,yval))
             
-            print('Epoch for %d/%d : Train data loss = %f - Validation data loss = %f' % (i, epoch, self.train_loss[i], self.validation_loss[i]))
-        
-        x = np.linspace(0,epoch+1,1)
+                print('Epoch for %d/%d : Train data loss = %f - Validation data loss = %f' % (i, epoch, self.train_loss[i], self.validation_loss[i]))
+            else:
+                print('Epoch for %d/%d : Train data loss = %f' % (i, epoch, self.train_loss[i]))
 
-        if(xtest != None and ytest != None):
-            self.forwardProp(xtest)
-            print("Test accuracy = %f" % (1 - self.calculate_error(self.a2,ytest)))
-        if(xval != None and yval != None):
-            plt.scatter(x,self.validation_loss,color='red')
         
-        plt.scatter(x,self.train_loss,color='blue')
+        x = np.linspace(0,epoch+1,len(self.train_loss))
+
+        if(np.any(xtest) != None and np.any(ytest) != None):
+            self.forwardProp(xtest)
+            # print("Test accuracy = %f" % (np.mean(self.a2 == ytest)))
+        if(np.any(xval) != None and np.any(yval) != None):
+            plt.scatter(x,self.validation_loss,color='red', label="validation_loss")
+        
+        plt.plot(x,self.train_loss,color='blue',label="train_loss")
         plt.legend()
+        plt.xlabel("Epoches")
+        plt.ylabel("Training Cost")
         plt.title("Training Error vs Epoches")
         plt.show()
 
 
-        return self.weights1, self.bias1, self.weights2, self.bias2
+        return self.weights1, self.bias1, self.weights2, self.bias2, self.a2
