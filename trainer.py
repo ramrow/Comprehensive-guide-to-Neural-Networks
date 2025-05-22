@@ -5,13 +5,12 @@ class neural_network():
     """
     input, hidden, and output sizes are all vertical length of layers
     """
-    def __init__(self, input_size, hidden_size, output_size, learning_rate, loss_func="mse", act_func="sigmoid"):
+    def __init__(self, input_dimension, hidden_dimension, output_dimension, learning_rate, loss_func="mse", act_func="sigmoid"):
 
-        #Here we have two hidden layers
-        self.weights1 = np.random.randn(input_size, hidden_size)
-        self.bias1 = np.zeros((1, hidden_size))
-        self.weights2 = np.random.randn(hidden_size, output_size)
-        self.bias2 = np.zeros((1, output_size))
+        self.weights1 = np.random.randn(input_dimension, hidden_dimension)
+        self.bias1 = np.zeros((1, hidden_dimension))
+        self.weights2 = np.random.randn(hidden_dimension, output_dimension)
+        self.bias2 = np.zeros((1, output_dimension))
 
         self.loss_function = loss_func
         self.act_function = act_func
@@ -52,7 +51,7 @@ class neural_network():
 
         if self.loss_function == 'mse':
             return np.mean((predicted - measured)**2)
-        elif self.loss_function == 'log_loss':
+        elif self.loss_function == 'log':
             return -np.mean(predicted*np.log(predicted) + (1-measured)*np.log(1-predicted))
         elif self.loss_function == 'categorical_crossentropy':
             return -np.mean(measured*np.log(predicted))
@@ -63,7 +62,7 @@ class neural_network():
 
         if self.loss_function == 'mse':
             return self.a2 - label
-        elif self.loss_function == 'log_loss':
+        elif self.loss_function == 'log':
             return -(label/self.a2 - (1-label)/(1-self.a2))
         elif self.loss_function == 'categorical_crossentropy':
             return self.a2 - label
@@ -122,9 +121,8 @@ class neural_network():
         plt.plot(x,self.train_loss,color='blue',label="train_loss")
         plt.legend()
         plt.xlabel("Epoches")
-        plt.ylabel("Training Cost")
-        plt.title("Training Error vs Epoches")
+        plt.ylabel("Training Loss")
+        plt.title("Training Loss vs Epoches")
         plt.show()
-
 
         return self.weights1, self.bias1, self.weights2, self.bias2, self.a2
