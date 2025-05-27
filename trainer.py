@@ -114,7 +114,6 @@ class neural_network():
 
         if(np.any(xtest) != None and np.any(ytest) != None):
             self.forwardProp(xtest)
-            # print("Test accuracy = %f" % (np.mean(self.a2 == ytest)))
         if(np.any(xval) != None and np.any(yval) != None):
             plt.scatter(x,self.validation_loss,color='red', label="validation_loss")
         
