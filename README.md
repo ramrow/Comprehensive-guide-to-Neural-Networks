@@ -21,11 +21,6 @@ Another fundemental aspect of neural networks are the weights and biases:
     - Each bias adds a layer of flexibility to the model it is applied to the summation of all weights mutiplied to each input(node) in each layer.
     - It is used to expand the range of the threshold in which a node can be activated through the activation function.
     - Flexibility is extremely important as sharp thresholds aren't likely to exist in a real world setting. The training of the neural network also updates the biases for each iteration in order to finetune the model.
-$$
-\displaystyle{  y =  \sum_{i}^n w_{i}x_{i} + b }\\
-\textbf{ y is weighted sum of}\\
-\textbf{ w is the list of weights}\\
-\textbf{ x is the list of inputs}\\
-\textbf{ b is the bias}
-$$
+$$\displaystyle{  y =  \sum_{i}^n w_{i}x_{i} + b }\\ \textbf{ y is weighted sum of}\\ \textbf{ w is the list of weights}\\ \textbf{ x is the list of inputs}\\ \textbf{ b is the bias} $$
+
 
