@@ -11,7 +11,7 @@ The most basic component of a neural network is called a node(inspired cells in 
 
 There are three main sections to a neural network: input layer, where data gets offloaded onto the model, the hidden layer, where calculations take place in order to produce a result, and finally an output layer, where the results fromr the model are spat out.
 
-Another fundemental aspect of neural networks are the weights and biases: 
+### Components 
 - Weights:
     - Each weight corresponds to an input and is mutiplied to its corresponding input during forward propagation.
     - The weights represent how much influence an input has on the output by scaling it through mutiplication.
@@ -27,5 +27,18 @@ $$ \textbf{ y is weighted sum of}$$
 $$ \textbf{ w is the list of weights}$$
 $$ \textbf{ x is the list of inputs}$$
 $$ \textbf{ b is the bias} $$
+
+### Activation Function
+Activation functions play an important role in determining whether or not a node should be activated or not. The activation function is applied to the output of a node in both the hidden and output layers. The functions are important because they introduce non-linearity to the model(non-linearity means that the relationship between input and output aren't a straight line), helps capture real world data where there can be overlaps(problems that are not linearly separable). Activation functions also provide a vital role in backpropagation by providing the gradient needed to update both the weights and biases.
+
+Here are some examples of popular activation functions:
+1. Sigmoid
+    - Shaped like an S going from 0 to 1 concaving upwards from all x less than 0 and concaving downwards from all x greater than or equal to 0
+    - Useful for binary classifications
+    - Defined as: $$A = \frac{1}{1+e^{-x}}$$
+2. Tanh
+    - Hyperbolic tangent function, basically just a variation of the sigmoid function
+    - Defined as: 
+3. ReLU
 
 
