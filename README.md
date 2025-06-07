@@ -1,5 +1,5 @@
 # Comprehensive Guide to Neural Networks
-Summer 2025 built for a more personalized experience working with neural networks, helps build understanding surrounding the math and complexity behind the model. Please keep in mind that this project is intended to give beginners a rundown of the important aspects of a neural network, and will not cover variations like liquid networks, Kolmogorov-Arnold networks, or etc, nor will this guide cover advance practices either.A simple model is built and tested on a set of pixelized numbers to identify between 1s and 5s
+Summer 2025 built for a more personalized experience working with neural networks, helps build understanding surrounding the math and complexity behind the model. Please keep in mind that this project is intended to give beginners a rundown of the important aspects of a neural network, and will not cover variations like liquid networks, Kolmogorov-Arnold networks, or etc, nor will this guide cover advance practices either.A simple model is built and tested on a set of pixelized numbers to identify between 1s and 5s. Please keep in mind that there can be errors in this guide and any feedback would be appreciated.
 ## Features
 The data folder includes both the testing and training data after feature transformation was performed:
 - Average intensity of for each grid where 5s will have higher intensity while 1s while have lower intensity. 
@@ -28,7 +28,7 @@ $$ \textbf{ w is the list of weights}$$
 $$ \textbf{ x is the list of inputs}$$
 $$ \textbf{ b is the bias} $$
 
-### Activation Function
+## Activation Function
 Activation functions play an important role in determining whether or not a node should be activated or not. The activation function is applied to the output of a node in both the hidden and output layers. The functions are important because they introduce non-linearity to the model(non-linearity means that the relationship between input and output aren't a straight line), helps capture real world data where there can be overlaps(problems that are not linearly separable). Activation functions also provide a vital role in backpropagation by providing the gradient needed to update both the weights and biases.
 
 Here are some examples of popular activation functions:
@@ -51,4 +51,6 @@ Here are some examples of popular activation functions:
       
       $$A(x) = max(0,x)$$
 
+## Backpropagation
+This is a the process that goes back from the output layer to the input layer and updates the weights and biases for the nodes. 
 
