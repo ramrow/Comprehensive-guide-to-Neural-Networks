@@ -1,5 +1,5 @@
 # Comprehensive Guide to Neural Networks
-Summer 2025 built for a more personalized experience working with neural networks, helps build understanding surrounding the math and complexity behind the model. Please keep in mind that this project is intended to give beginners a rundown of the important aspects of a neural network, and will not cover variations like liquid networks, Kolmogorov-Arnold networks, or etc, nor will this guide cover advance practices either.A simple model is built and tested on a set of pixelized numbers to identify between 1s and 5s. Please keep in mind that there can be errors in this guide and any feedback would be appreciated.
+Summer 2025 built for a more personalized experience working with neural networks, helps build understanding surrounding the math and complexity behind the model. Please keep in mind that this project is intended to: first and foremost, strengthen my own understanding of neural network, and secondly, give beginners a rundown of the important aspects of a neural network, and will not cover variations like liquid networks, Kolmogorov-Arnold networks, or etc, nor will this guide cover advance practices either.A simple model is built and tested on a set of pixelized numbers to identify between 1s and 5s. Please keep in mind that there can be errors in this guide and any feedback would be appreciated.
 ## Features
 The data folder includes both the testing and training data after feature transformation was performed:
 - Average intensity of for each grid where 5s will have higher intensity while 1s while have lower intensity. 
@@ -52,5 +52,6 @@ Here are some examples of popular activation functions:
       $$A(x) = max(0,x)$$
 
 ## Backpropagation
-This is a the process that goes back from the output layer to the input layer and updates the weights and biases for the nodes. 
+This is a the process that goes back from the output layer to the input layer and updates the weights and biases for the nodes. Backpropagation is the keystone of the neural network as it is what allows the network to "learn" and improve itself. The core of backpropagation is the chain rule from Calculus which allows the network to calculate how each weight contributes to error when comparing the output and the label, by calculating and mutiplying the graidents of the loss function and the hidden layers.
+
 
