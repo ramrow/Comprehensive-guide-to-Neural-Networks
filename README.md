@@ -52,6 +52,12 @@ Here are some examples of popular activation functions:
       $$A(x) = max(0,x)$$
 
 ## Backpropagation
-This is a the process that goes back from the output layer to the input layer and updates the weights and biases for the nodes. Backpropagation is the keystone of the neural network as it is what allows the network to "learn" and improve itself. The core of backpropagation is the chain rule from Calculus which allows the network to calculate how each weight contributes to error when comparing the output and the label, by calculating and mutiplying the graidents of the loss function and the hidden layers.
+This is a the process that goes back from the output layer to the input layer and updates the weights and biases for the nodes. Backpropagation is the keystone of the neural network as it is what allows the network to "learn" and improve itself. The core of backpropagation is the chain rule from Calculus which allows the network to calculate how each weight contributes to error when comparing the output and the label, by calculating and mutiplying the graidents of the loss function and the hidden layers:
 
+$$\frac{\partial loss}{\partial weight} = \frac{\partial loss}{\partial active} * \frac{\partial active}{\partial y} * \frac{\partial y}{\partial weight}$$
 
+This gradient is then used to caliberate the weights of the network using the learning rate, an input parameter to control the size of the step taken towards the negative gradient
+
+$$w_{new} = w_{old} - \eta*\frac{\partial loss}{\partial weight}$$
+
+This process is repeated for a inputted number of times(# of epoches) in the model on this github repo in order to improve the accuracy of the model.
