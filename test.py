@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from trainer import neural_network as nn
+from model import neural_network as nn
 from matplotlib.colors import ListedColormap
 
 
@@ -65,7 +65,7 @@ def plot(x, y, model):
 xtrain, ytrain, xtest, ytest = create_inputs()
 m,n = (xtrain.shape)
 
-model = nn(n,2,1,0.1,act_func="sigmoid")
-_,_,_,_,test_output = model.train(1000000,xtrain,ytrain,xtest=xtest,ytest=ytest)
+model = nn(n,2,1,0.1,act_func="tan")
+model.train(100000,xtrain,ytrain,xtest=xtest,ytest=ytest)
 plot(xtest,ytest,model)
 plot(xtrain,ytrain,model)
