@@ -33,20 +33,17 @@ Activation functions play an important role in determining whether or not a node
 
 Here are some examples of popular activation functions:
 1. Sigmoid
-    - Shaped like an S going from 0 to 1 concaving upwards from all x less than 0 and concaving downwards from all x greater than or equal to 0
-    - Useful for binary classifications as output ranges from 0 to 1
+    - Shaped like an S going from 0 to 1 concaving upwards from all x less than 0 and concaving downwards from all x greater than or equal to 0, useful for binary classifications as output ranges from 0 to 1
     - Defined as:
       
       $$A = \frac{1}{1+e^{-x}}$$
 2. Tanh
-    - Hyperbolic tangent function, basically just a variation of the sigmoid function
-    - Output ranges from -1 to 1
+    - Hyperbolic tangent function, basically just a variation of the sigmoid function, output ranges from -1 to 1
     - Defined as:
       
       $$tanh(x) = 2*sigmoid(2x)-1 = \frac{2}{1+e^{-2x}}-1$$
 3. ReLU
-    - Rectified Linear Unit, and only passes positive inputs as it is and will pass 0 if the input is less than or equal to 0
-    - Less computationally expensive when compared to sigmoid and tanh due to simplier mathematical operations
+    - Rectified Linear Unit, and only passes positive inputs as it is and will pass 0 if the input is less than or equal to 0. Less computationally expensive when compared to sigmoid and tanh due to simplier mathematical operations
     - Defined as:
       
       $$A(x) = max(0,x)$$
